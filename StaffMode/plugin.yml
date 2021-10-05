@@ -1,0 +1,9 @@
+name: StaffMode
+main: StaffMode\Main
+api: [3.0.0]
+version: 1.2
+author: SoyDeusX/DPG
+commands:
+    staff:
+     description: "§aTools for MaharliKraft Staffs."
+     permission: "staffmode.cmd"
