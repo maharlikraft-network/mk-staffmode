@@ -133,15 +133,15 @@ class Main extends PluginBase implements Listener {
 			
 			$pl->sendMessage("\n");
 			$pl->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."]");
-			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." Ito ang StaffMode Tagalog Version para sa MaharliKraft Network");
-			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." Matagumpay na nai-save ang iyong data");
-			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." Magpatuloy sa pag-moderate ng mga players");
+			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." This is StaffMode Engish Version For MaharliKraft Network");
+			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." Your data has been saved successfully");
+			$pl->sendMessage(TextFormat::DARK_GRAY."» ".TextFormat::YELLOW." Enjoy moderating players by typing /staff");
 			$pl->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."]");
 			$pl->sendMessage("\n");
 			
 			foreach (Server::getInstance()->getOnlinePlayers() as $staff) {
 				
-				$staff->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."] ".TextFormat::RESET.TextFormat::YELLOW.$pl->getName().TextFormat::GRAY." ay pumasok sa server");
+				$staff->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."] ".TextFormat::RESET.TextFormat::YELLOW.$pl->getName().TextFormat::GRAY." joined the server");
 				
 			}
 		}
@@ -179,7 +179,7 @@ class Main extends PluginBase implements Listener {
 						
 						foreach (Server::getInstance()->getOnlinePlayers() as $staff) {
 							
-							$staff->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."] ". TextFormat::RESET.TextFormat::YELLOW.$pl->getName().TextFormat::GRAY." ay umalis sa server");
+							$staff->sendMessage(TextFormat::DARK_GRAY.TextFormat::BOLD."[".TextFormat::RED."STAFF".TextFormat::DARK_GRAY."] ". TextFormat::RESET.TextFormat::YELLOW.$pl->getName().TextFormat::GRAY." leaved the server");
 							$this->score->remove($staff);
 							
 							if (($taks = $this->getTask()) instanceof ScoreMod) {
@@ -232,8 +232,8 @@ class Main extends PluginBase implements Listener {
 			$to->yaw = $ev->getTo()->yaw;
 			$to->pitch = $ev->getTo()->pitch;
 			$ev->setTo($to);
-			$pl->sendPopup(TextFormat::RED." Freezed ka, hindi ka makakagalaw.");
-			$pl->addTitle(TextFormat::RED."IKAW AY NAKA", TextFormat::RED."FREEZE");
+			$pl->sendPopup(TextFormat::RED." You've been frezeed. You can't move.");
+			$pl->addTitle(TextFormat::RED."Youve been", TextFormat::RED."FREEZED");
 		
 		}
 	}
@@ -248,7 +248,7 @@ class Main extends PluginBase implements Listener {
 				
 				$this->staff [$pl->getName()] = $pl->getName();
 				$this->getScheduler()->scheduleRepeatingTask(($task = new ScoreMod($this)), 20);
-				$pl->sendMessage($this->prefix.TextFormat::GREEN."Pinapagana mo ang staffmode.");
+				$pl->sendMessage($this->prefix.TextFormat::GREEN."StaffMode turned on Successfully.");
 				$pl->getInventory()->clearAll();
 				$pl->getArmorInventory()->clearAll();
 				$pl->setGamemode(1);
@@ -272,7 +272,7 @@ class Main extends PluginBase implements Listener {
 					$pl->getArmorInventory()->clearAll();
 					$pl->setGamemode(0);
 					$pl->getInventory()->clearAll();
-					$pl->sendMessage($this->prefix.TextFormat::RED."Na-deactivate mo ang staffmode.");
+					$pl->sendMessage($this->prefix.TextFormat::RED."StaffMode turned off Successfully.");
 					
 				}
 			}
@@ -306,7 +306,7 @@ class Main extends PluginBase implements Listener {
 		});
 		
 		$form->setTitle(TextFormat::RED.TextFormat::BOLD."PLAYER LIST");
-		$form->setContent(TextFormat::GRAY."Pumili ng Player para magpatuloy");
+		$form->setContent(TextFormat::GRAY."Choose a Player");
 		
 		foreach (Server::getInstance()->getOnlinePlayers() as $on) {
 			
@@ -337,7 +337,7 @@ class Main extends PluginBase implements Listener {
 			if ($target instanceof Player) {
 				
 				$pl->teleport($target);
-				$pl->sendMessage(TextFormat::RED."Nateleport ka kay: ".TextFormat::GRAY.$target->getName());
+				$pl->sendMessage(TextFormat::RED."Teleported to: ".TextFormat::GRAY.$target->getName());
 				
 			}
 		}
@@ -369,7 +369,7 @@ class Main extends PluginBase implements Listener {
 		
 		$form->setTitle(TextFormat::RED.TextFormat::BOLD."BAN OPTIONS");
 		$form->addButton(TextFormat::RED."BAN PLAYER/S");
-		$form->addButton(TextFormat::RED."TIGNAN ANG BAN PLAYER/S");
+		$form->addButton(TextFormat::RED."BAN PLAYER/S LIST");
 		$form->sendToPlayer($pl);
 		
 		return $form;
@@ -393,8 +393,8 @@ class Main extends PluginBase implements Listener {
 			
 		});
 		
-		$form->setTitle(TextFormat::RED.TextFormat::BOLD."LISTAHAN NG PLAYERS");
-		$form->setContent(TextFormat::GRAY."Pumili ng player para magpatuloy");
+		$form->setTitle(TextFormat::RED.TextFormat::BOLD."PLAYERS LIST");
+		$form->setContent(TextFormat::GRAY."Choose a player");
 		
 		foreach (Server::getInstance()->getOnlinePlayers() as $on) {
 			
@@ -668,7 +668,7 @@ class Main extends PluginBase implements Listener {
 				
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			
 			}
 		}
@@ -683,13 +683,13 @@ class Main extends PluginBase implements Listener {
 				if ($playerTotp !== $pl) {
 					
 					$pl->teleport($playerTotp);
-					$pl->sendMessage(TextFormat::RED."Ikaw ay nateleport sa: ".TextFormat::GRAY.$playerTotp->getName());
+					$pl->sendMessage(TextFormat::RED."Teleported to: ".TextFormat::GRAY.$playerTotp->getName());
 					
 				}
 				
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			}
 		}
 		
@@ -701,7 +701,7 @@ class Main extends PluginBase implements Listener {
 				
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 				
 			}
 		}
@@ -719,7 +719,7 @@ class Main extends PluginBase implements Listener {
 				
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			
 			}
 		}
@@ -729,11 +729,11 @@ class Main extends PluginBase implements Listener {
 			if ($pl->hasPermission("staffmode.cmd") or $pl->isOp()) {
 				
 				$pl->setGamemode(0);
-				$pl->sendMessage(TextFormat::RED."Pinalitan mo ang gamemode mo sa ".TextFormat::GRAY."Survival");
+				$pl->sendMessage(TextFormat::RED."Anonymously changed your gamemode to ".TextFormat::GRAY."Survival");
 			
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			
 			}
 		}
@@ -743,7 +743,7 @@ class Main extends PluginBase implements Listener {
 			if ($pl->hasPermission("staffmode.cmd") or $pl->isOp()) {
 				
 				$pl->setGamemode(1);
-				$pl->sendMessage(TextFormat::RED."Pinalitan mo ang gamemode mo sa ".TextFormat::GRAY."Creative");
+				$pl->sendMessage(TextFormat::RED."Anonymously changed your gamemode to ".TextFormat::GRAY."Creative");
 			
 			} else {
 				
@@ -757,11 +757,11 @@ class Main extends PluginBase implements Listener {
 			if ($pl->hasPermission("staffmode.cmd") or $pl->isOp()) {
 				
 				$pl->setGamemode(3);
-				$pl->sendMessage(TextFormat::RED."Pinalitan mo ang gamemode mo sa ".TextFormat::GRAY."Spectator");
+				$pl->sendMessage(TextFormat::RED."Anonymously changed your gamemode to ".TextFormat::GRAY."Spectator");
 				
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 				
 			}
 		}
@@ -782,7 +782,7 @@ class Main extends PluginBase implements Listener {
 			
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 				
 			}
 		}
@@ -791,7 +791,7 @@ class Main extends PluginBase implements Listener {
 			
 			if ($pl->hasPermission("staffmode.cmd") or $pl->isOp()) {
 				
-				$pl->sendMessage($this->prefix.TextFormat::GREEN."Na-enabled na ang Vanish.");
+				$pl->sendMessage($this->prefix.TextFormat::GREEN."Vanished.");
 				
 				foreach (Server::getInstance()->getOnlinePlayers() as $players) {
 					
@@ -811,7 +811,7 @@ class Main extends PluginBase implements Listener {
 			
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			
 			}
 		}
@@ -820,7 +820,7 @@ class Main extends PluginBase implements Listener {
 			
 			if ($pl->hasPermission("staffmode.cmd") or $pl->isOp()) {
 				
-				$pl->sendMessage($this->prefix.TextFormat::RED."Na-disabled na ang Vanish.");
+				$pl->sendMessage($this->prefix.TextFormat::RED."Unvanished.");
 				
 				foreach (Server::getInstance()->getOnlinePlayers() as $players) {
 					
@@ -840,7 +840,7 @@ class Main extends PluginBase implements Listener {
 			
 			} else {
 				
-				$pl->sendMessage(TextFormat::RED."Wala kang permission para gamitin ito");
+				$pl->sendMessage(TextFormat::RED."No permission");
 			
 			}
 		}
@@ -859,7 +859,7 @@ class Main extends PluginBase implements Listener {
 							
 					if (!in_array ($pl->getName(), $this->freeze)) {
 								
-						$this->getServer()->broadcastMessage(TextFormat::DARK_GRAY."» ".TextFormat::GRAY.$pl->getName().TextFormat::RED." Ay na freeze dahil kay ".TextFormat::GRAY.$damager->getName());
+						$this->getServer()->broadcastMessage(TextFormat::DARK_GRAY."» ".TextFormat::GRAY.$pl->getName().TextFormat::RED." has been freezed by ".TextFormat::GRAY.$damager->getName());
 						$this->freeze[] = $pl->getName();
 						$ev->setCancelled();
 						
@@ -867,8 +867,8 @@ class Main extends PluginBase implements Listener {
 							
 						if (in_array ($pl->getName(), $this->freeze)) {
 								
-							$pl->addTitle(TextFormat::GREEN."IKAW AY", "NA-UNFREEZE");
-							$this->getServer()->broadcastMessage(TextFormat::DARK_GRAY."» ".TextFormat::GRAY.$pl->getName().TextFormat::RED." Ay na-unfreezed dahil kay ".TextFormat::GRAY.$damager->getName());
+							$pl->addTitle(TextFormat::GREEN."YOU'VE BEEN", "UNFREEZED");
+							$this->getServer()->broadcastMessage(TextFormat::DARK_GRAY."» ".TextFormat::GRAY.$pl->getName().TextFormat::RED." has been unfreezed by ".TextFormat::GRAY.$damager->getName());
 							unset($this->freeze [array_search ($pl->getName(), $this->freeze)]);
 							$ev->setCancelled();
 						
